@@ -1,9 +1,6 @@
-const allowedCors = [
-  'https://untitled-dream.nomoredomains.sbs',
-  'http://untitled-dream.nomoredomains.sbs',
-  'https://localhost:3001',
-  'http://localhost:3001',
-];
+const {
+  ALLOWED_CORS,
+} = require('../utils/constants');
 
 // eslint-disable-next-line consistent-return
 module.exports = (req, res, next) => {
@@ -12,7 +9,7 @@ module.exports = (req, res, next) => {
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
   const requestHeaders = req.headers['access-control-request-headers'];
 
-  if (allowedCors.includes(origin)) {
+  if (ALLOWED_CORS.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
     res.header('Access-Control-Allow-Credentials', true);
   }

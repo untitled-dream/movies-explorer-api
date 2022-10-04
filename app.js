@@ -6,21 +6,27 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
 
+const {
+  MONGO_DB_ADDRESS,
+  PORT_NUMBER,
+} = require('./utils/constants');
+
 const auth = require('./middlewares/auth');
 const cors = require('./middlewares/cors');
+const rateLimiter = require('./middlewares/rateLimit');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+
 const moviesRoutes = require('./routes/movies');
 const usersRoutes = require('./routes/users');
 const { login, createUser } = require('./controllers/users');
 
-const { requestLogger, errorLogger } = require('./middlewares/logger');
-
 const NotFoundError = require('./errors/notFoundError');
 
-const { PORT = 3000 } = process.env;
+const { PORT = PORT_NUMBER } = process.env;
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb', {
+mongoose.connect(MONGO_DB_ADDRESS, {
   useNewUrlParser: true,
 });
 
@@ -30,6 +36,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(requestLogger);
+app.use(rateLimiter);
 
 app.post(
   '/signin',
