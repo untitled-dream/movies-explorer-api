@@ -8,49 +8,55 @@ const ALLOWED_CORS = [
 ];
 
 const ERROR_MESSAGE = {
-  FORBIDDEN: 'Недостаточно прав для выполнения этого действия',
-  NOT_FOUND: 'Ресурс не найден',
-  INTERNAL_SERVER_ERROR: 'Внутренняя ошибка сервера',
-  BAD_LINK: 'Значение не является URL-адресом',
-  VALIDATION_ERROR: 'Ошибка при валидации',
-  NOT_UNIQUE_EMAIL_VALUE: 'Пользователь с таким Email уже зарегистрирован'
+  AUTH_ERROR: 'authorization required',
+  FORBIDDEN: 'insufficient rights to perform this action',
+  NOT_FOUND: 'the resource can not be found',
+  INTERNAL_SERVER_ERROR: 'internal server error',
+  BAD_LINK: 'the value is not a URL',
+  VALIDATION_ERROR: 'validation error',
+  NOT_UNIQUE_EMAIL_VALUE: 'user with this email is already registered'
 };
 
-const AUTH_ERROR_BAD_EMAIL_PASSWORD = 'Неправильные почта и пароль';
+const AUTH_ERROR_WRONG_EMAIL_PASSWORD = 'Wrong email and password';
 
 const USER_SCHEMA_MSG = {
   REQUIRED: {
-    EMAIL: 'Поле "email (адрес эл. почты)" является обязательнным',
-    PASSWORD: 'Поле "password (пароль)" является обязательнным',
-    NAME: 'Поле "name (имя пользователя)" является обязательнным'
+    EMAIL: 'Field "EMAIL" is required',
+    PASSWORD: 'Field "PASSWORD" is required',
+    NAME: 'Filed "NAME" is required'
   },
   VALIDATE: {
-    EMAIL: 'Значение поля "email" не является адресом электронно почты',
-    PASSWORD: 'Значение поля "password" не является надежным',
-    NAME: 'Значение поля "name" не удовлетворяет условия - длина строки от 2 до 30 символов'
+    EMAIL: '"EMAIL" field value is not an email address',
+    PASSWORD: '"PASSWORD" field value is not reliable',
+    NAME: '"NAME" field value does not satisfy the conditions - the length of the string is from 2 to 30 characters'
   }
 };
 
 const MOVIE_SCHEMA_MSG = {
   REQUIRED: {
-    COUNTRY: 'Значение поля "country (страна создания)" является обязательным',
-    DIRECTOR: 'Значение поля "director (режиссёр)" является обязательным',
-    DURATION: 'Поле-число "duration (длительность)" является обязательным',
-    YEAR: 'Значение поля "year (год выпуска)" является обязательным',
-    DESCRIPTION: 'Значение поля "description (описание)" является обязательным',
-    IMAGE: 'Значение поля "image (ссылка на постер)" является обязательным',
-    TRAILER_LINK: 'Значение поля "trailer (ссылка на трейлер)" является обязательным',
-    THUMBNAIL: 'Значение поля "thumbnail (миниатюрное изображение постера)" является обязательным',
-    OWNER: 'Значение поля "owner (_id пользователя, сохранившего фильм)" является обязательным',
-    MOVIE_ID: 'Поле-число "movieId (id фильма)" является обязательным',
-    NAME_RU: 'Значение поля "nameRU (название фильма на русском языке)" является обязательным',
-    NAME_EN: 'Значение поля "nameEN (название фильма на английском языке)" является обязательным'
+    COUNTRY: 'Field "COUNTRY" is required',
+    DIRECTOR: 'Field "DIRECTOR" is required',
+    DURATION: 'Field "DURATION" is required',
+    YEAR: 'Field "YEAR" is required',
+    DESCRIPTION: 'Field "DESCRIPTION" is required',
+    IMAGE: 'Field "IMAGE" is required',
+    TRAILER_LINK: 'Field "TRAILER_LINK" is required',
+    THUMBNAIL: 'Field "THUMBNAIL" is required',
+    OWNER: 'Field "OWNER" is required',
+    MOVIE_ID: 'Field "MOVIE_ID" is required',
+    NAME_RU: 'Field "NAME_RU" is required',
+    NAME_EN: 'Field "NAME_EN" is required'
   },
   VALIDATE: {
-    IMAGE_LINK: 'Значение поля "image (ссылка на постер)" не является URL-адресом',
-    TRAILER_LINK: 'Значение поля "trailer (ссылка на трейлер)" не является URL-адресом',
-    THUMBNAIL: 'Значение поля "thumbnail (миниатюрное изображение постера)" не является URL-адресом'
+    IMAGE: '"IMAGE" field value is not a URL',
+    TRAILER_LINK: 'Field "TRAILER_LINK" is not a URL',
+    THUMBNAIL: 'Field "THUMBNAIL" is not a URL'
   }
+};
+
+const LOGGER_FILENAME = {
+  REQUEST: 'request.log',
+  ERROR: 'error.log'
 };
 
 module.exports = {
@@ -58,7 +64,8 @@ module.exports = {
   MONGODB_ADDRESS,
   PORT_NUMBER,
   ALLOWED_CORS,
-  AUTH_ERROR_BAD_EMAIL_PASSWORD,
+  AUTH_ERROR_WRONG_EMAIL_PASSWORD,
   USER_SCHEMA_MSG,
-  MOVIE_SCHEMA_MSG
+  MOVIE_SCHEMA_MSG,
+  LOGGER_FILENAME
 };

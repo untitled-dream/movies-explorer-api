@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 
 const {
-  MONGO_DB_ADDRESS,
+  MONGODB_ADDRESS,
   PORT_NUMBER
 } = require('./utils/constants');
 
@@ -16,13 +16,13 @@ const rateLimiter = require('./middlewares/rateLimit');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandling = require('./middlewares/errorHandling');
-const router = require('./routes');
+const router = require('./routes/index');
 
 const { PORT = PORT_NUMBER } = process.env;
 
 const app = express();
 
-mongoose.connect(MONGO_DB_ADDRESS, {
+mongoose.connect(MONGODB_ADDRESS, {
   useNewUrlParser: true
 });
 

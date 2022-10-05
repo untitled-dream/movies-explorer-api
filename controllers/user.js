@@ -74,11 +74,10 @@ module.exports.getCurrentUser = (req, res, next) => {
 
 module.exports.updateCurrentUser = (req, res, next) => {
   const newNameValue = req.body.name;
-  const newAboutValue = req.body.about;
 
   User.findByIdAndUpdate(
     { _id: req.user._id },
-    { name: newNameValue, about: newAboutValue },
+    { name: newNameValue },
     { new: true, runValidators: true }
   )
     .then((user) => {

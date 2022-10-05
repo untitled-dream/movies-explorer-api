@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs');
 
 const {
   USER_SCHEMA_MSG,
-  AUTH_ERROR_BAD_EMAIL_PASSWORD
+  AUTH_ERROR_WRONG_EMAIL_PASSWORD
 } = require('../utils/constants');
 
 const userSchema = new mongoose.Schema({
@@ -50,13 +50,13 @@ userSchema.statics.findUserByCredentials = function findUser(email, password) {
   return this.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
-        return Promise.reject(new Error(AUTH_ERROR_BAD_EMAIL_PASSWORD));
+        return Promise.reject(new Error(AUTH_ERROR_WRONG_EMAIL_PASSWORD));
       }
 
       return bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
-            return Promise.reject(new Error(AUTH_ERROR_BAD_EMAIL_PASSWORD));
+            return Promise.reject(new Error(AUTH_ERROR_WRONG_EMAIL_PASSWORD));
           }
 
           return user;

@@ -4,7 +4,7 @@ const {
   }
 } = require('../utils/constants');
 
-module.exports.errorHandling = (err, req, res, next) => {
+const errorHandling = (err, req, res, next) => {
   const { statusCode = 500, message } = err;
 
   res.status(statusCode).send({
@@ -13,3 +13,5 @@ module.exports.errorHandling = (err, req, res, next) => {
 
   next();
 };
+
+module.exports = errorHandling;
