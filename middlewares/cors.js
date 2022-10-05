@@ -1,5 +1,5 @@
 const {
-  ALLOWED_CORS,
+  ALLOWED_CORS
 } = require('../utils/constants');
 
 // eslint-disable-next-line consistent-return
