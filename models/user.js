@@ -7,41 +7,41 @@ const isLength = require('validator/lib/isLength');
 const bcrypt = require('bcryptjs');
 
 const {
-  USER_SCHEMA_MSG,
+  USER_SCHEMA_MESSAGE,
   AUTH_ERROR_WRONG_EMAIL_PASSWORD
 } = require('../utils/constants');
 
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
-    required: [true, USER_SCHEMA_MSG.REQUIRED.EMAIL],
+    required: [true, USER_SCHEMA_MESSAGE.REQUIRED.EMAIL],
     unique: true,
     validate: {
       validator(v) {
         return isEmail(v);
       },
-      message: (props) => `${props.value} ${USER_SCHEMA_MSG.VALIDATE.EMAIL}`
+      message: (props) => `${props.value} ${USER_SCHEMA_MESSAGE.VALIDATE.EMAIL}`
     }
   },
   password: {
     type: String,
-    required: [true, USER_SCHEMA_MSG.REQUIRED.PASSWORD],
+    required: [true, USER_SCHEMA_MESSAGE.REQUIRED.PASSWORD],
     select: false,
     validate: {
       validator(v) {
         return isStrongPassword(v);
       },
-      message: () => USER_SCHEMA_MSG.VALIDATE.PASSWORD
+      message: () => USER_SCHEMA_MESSAGE.VALIDATE.PASSWORD
     }
   },
   name: {
     type: String,
-    required: [true, USER_SCHEMA_MSG.REQUIRED.NAME],
+    required: [true, USER_SCHEMA_MESSAGE.REQUIRED.NAME],
     validate: {
       validator(v) {
         return isLength(v, { min: 2, max: 30 });
       },
-      message: (props) => `${props.value} ${USER_SCHEMA_MSG.VALIDATE.NAME}`
+      message: (props) => `${props.value} ${USER_SCHEMA_MESSAGE.VALIDATE.NAME}`
     }
   }
 });

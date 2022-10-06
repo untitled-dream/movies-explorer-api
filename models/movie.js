@@ -4,83 +4,83 @@ const isURL = require('validator/lib/isURL');
 const isLength = require('validator/lib/isLength');
 
 const {
-  MOVIE_SCHEMA_MSG
+  MOVIE_SCHEMA_MESSAGE
 } = require('../utils/constants');
 
 const movieSchema = new mongoose.Schema({
   country: {
     type: String,
-    required: [true, MOVIE_SCHEMA_MSG.REQUIRED.COUNTRY],
+    required: [true, MOVIE_SCHEMA_MESSAGE.REQUIRED.COUNTRY],
     validate: {
       validator(v) {
         return isLength(v, { min: 2, max: 100 });
       },
-      message: (props) => `${props.value} ${MOVIE_SCHEMA_MSG.VALIDATE.COUNTRY}`
+      message: (props) => `${props.value} ${MOVIE_SCHEMA_MESSAGE.VALIDATE.COUNTRY}`
     }
   },
   director: {
     type: String,
-    required: [true, MOVIE_SCHEMA_MSG.REQUIRED.DIRECTOR]
+    required: [true, MOVIE_SCHEMA_MESSAGE.REQUIRED.DIRECTOR]
   },
   duration: {
     type: Number,
-    required: [true, MOVIE_SCHEMA_MSG.REQUIRED.DURATION]
+    required: [true, MOVIE_SCHEMA_MESSAGE.REQUIRED.DURATION]
   },
   year: {
     type: String,
-    required: [true, MOVIE_SCHEMA_MSG.REQUIRED.YEAR]
+    required: [true, MOVIE_SCHEMA_MESSAGE.REQUIRED.YEAR]
   },
   description: {
     type: String,
-    required: [true, MOVIE_SCHEMA_MSG.REQUIRED.DESCRIPTION]
+    required: [true, MOVIE_SCHEMA_MESSAGE.REQUIRED.DESCRIPTION]
   },
   image: {
     type: String,
-    required: [true, MOVIE_SCHEMA_MSG.REQUIRED.IMAGE],
+    required: [true, MOVIE_SCHEMA_MESSAGE.REQUIRED.IMAGE],
     validate: {
       validator(v) {
         return isURL(v);
       },
-      message: (props) => `${props.value} ${MOVIE_SCHEMA_MSG.VALIDATE.IMAGE}`
+      message: (props) => `${props.value} ${MOVIE_SCHEMA_MESSAGE.VALIDATE.IMAGE}`
     }
   },
   trailerLink: {
     type: String,
-    required: [true, MOVIE_SCHEMA_MSG.REQUIRED.TRAILER_LINK],
+    required: [true, MOVIE_SCHEMA_MESSAGE.REQUIRED.TRAILER_LINK],
     validate: {
       validator(v) {
         return isURL(v);
       },
-      message: (props) => `${props.value} ${MOVIE_SCHEMA_MSG.VALIDATE.TRAILER_LINK}`
+      message: (props) => `${props.value} ${MOVIE_SCHEMA_MESSAGE.VALIDATE.TRAILER_LINK}`
     }
   },
   thumbnail: {
     type: String,
-    required: [true, MOVIE_SCHEMA_MSG.REQUIRED.THUMBNAIL],
+    required: [true, MOVIE_SCHEMA_MESSAGE.REQUIRED.THUMBNAIL],
     default: '',
     validate: {
       validator(v) {
         return isURL(v);
       },
-      message: (props) => `${props.value} ${MOVIE_SCHEMA_MSG.VALIDATE.THUMBNAIL}`
+      message: (props) => `${props.value} ${MOVIE_SCHEMA_MESSAGE.VALIDATE.THUMBNAIL}`
     }
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
-    required: [true, MOVIE_SCHEMA_MSG.REQUIRED.OWNER]
+    required: [true, MOVIE_SCHEMA_MESSAGE.REQUIRED.OWNER]
   },
   movieId: {
     type: mongoose.Schema.Types.ObjectId,
-    required: [true, MOVIE_SCHEMA_MSG.REQUIRED.MOVIE_ID]
+    required: [true, MOVIE_SCHEMA_MESSAGE.REQUIRED.MOVIE_ID]
   },
   nameRU: {
     type: String,
-    required: [true, MOVIE_SCHEMA_MSG.REQUIRED.NAME_RU]
+    required: [true, MOVIE_SCHEMA_MESSAGE.REQUIRED.NAME_RU]
   },
   nameEN: {
     type: String,
-    required: [true, MOVIE_SCHEMA_MSG.REQUIRED.NAME_EN]
+    required: [true, MOVIE_SCHEMA_MESSAGE.REQUIRED.NAME_EN]
   }
 });
 

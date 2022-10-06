@@ -19,7 +19,7 @@ const ERROR_MESSAGE = {
 
 const AUTH_ERROR_WRONG_EMAIL_PASSWORD = 'Wrong email and password';
 
-const USER_SCHEMA_MSG = {
+const USER_SCHEMA_MESSAGE = {
   REQUIRED: {
     EMAIL: 'Field "EMAIL" is required',
     PASSWORD: 'Field "PASSWORD" is required',
@@ -32,7 +32,7 @@ const USER_SCHEMA_MSG = {
   }
 };
 
-const MOVIE_SCHEMA_MSG = {
+const MOVIE_SCHEMA_MESSAGE = {
   REQUIRED: {
     COUNTRY: 'Field "COUNTRY" is required',
     DIRECTOR: 'Field "DIRECTOR" is required',
@@ -65,7 +65,7 @@ module.exports = {
   PORT_NUMBER,
   ALLOWED_CORS,
   AUTH_ERROR_WRONG_EMAIL_PASSWORD,
-  USER_SCHEMA_MSG,
-  MOVIE_SCHEMA_MSG,
+  USER_SCHEMA_MESSAGE,
+  MOVIE_SCHEMA_MESSAGE,
   LOGGER_FILENAME
 };
