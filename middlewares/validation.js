@@ -40,13 +40,14 @@ module.exports.validateCreateMovie = celebrate({
     image: Joi.string().required().custom(URLValidator),
     trailerLink: Joi.string().required().custom(URLValidator),
     thumbnail: Joi.string().required().custom(URLValidator),
-    movieId: Joi.number().required()
+    movieId: Joi.string().required().alphanum().length(24)
+      .hex()
   })
 });
 
 module.exports.validateDeleteMovie = celebrate({
   params: Joi.object().keys({
-    movieId: Joi.string().required().alphanum().length(24)
+    _id: Joi.string().required().alphanum().length(24)
       .hex()
   })
 });
