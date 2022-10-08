@@ -3,13 +3,15 @@ const mongoose = require('mongoose');
 
 require('dotenv').config();
 
+const { NODE_ENV, MONGODB_URI } = process.env;
+
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
 
 const {
-  MONGODB_ADDRESS,
-  PORT_NUMBER
+  MONGODB_DEV_ADDRESS,
+  PORT_NUMBER,
 } = require('./utils/constants');
 
 const cors = require('./middlewares/cors');
@@ -23,8 +25,8 @@ const { PORT = PORT_NUMBER } = process.env;
 
 const app = express();
 
-mongoose.connect(MONGODB_ADDRESS, {
-  useNewUrlParser: true
+mongoose.connect(NODE_ENV === 'production' ? MONGODB_URI : MONGODB_DEV_ADDRESS, {
+  useNewUrlParser: true,
 });
 
 app.use(cors);

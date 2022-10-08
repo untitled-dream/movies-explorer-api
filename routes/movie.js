@@ -2,13 +2,13 @@ const movieRouter = require('express').Router();
 
 const {
   validateCreateMovie,
-  validateDeleteMovie
+  validateDeleteMovie,
 } = require('../middlewares/validation');
 
 const {
   getMovies,
   createMovie,
-  deleteMovie
+  deleteMovie,
 } = require('../controllers/movie');
 
 movieRouter.get('/movies', getMovies);

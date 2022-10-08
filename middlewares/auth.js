@@ -6,8 +6,8 @@ const AuthError = require('../errors/authError');
 
 const {
   ERROR_MESSAGE: {
-    AUTH_ERROR
-  }
+    AUTH_ERROR,
+  },
 } = require('../utils/constants');
 
 module.exports = (req, res, next) => {

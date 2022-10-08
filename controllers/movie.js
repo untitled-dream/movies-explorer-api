@@ -8,8 +8,8 @@ const {
   ERROR_MESSAGE: {
     FORBIDDEN,
     NOT_FOUND,
-    VALIDATION_ERROR
-  }
+    VALIDATION_ERROR,
+  },
 } = require('../utils/constants');
 
 module.exports.getMovies = (req, res, next) => {

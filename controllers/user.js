@@ -10,8 +10,8 @@ const ConflictError = require('../errors/conflictError');
 const {
   ERROR_MESSAGE: {
     VALIDATION_ERROR,
-    NOT_UNIQUE_EMAIL_VALUE
-  }
+    NOT_UNIQUE_EMAIL_VALUE,
+  },
 } = require('../utils/constants');
 
 module.exports.login = (req, res, next) => {
@@ -23,7 +23,7 @@ module.exports.login = (req, res, next) => {
       const token = jwt.sign(
         { _id: user._id },
         NODE_ENV === 'production' ? JWT_SECRET : 'secret-key',
-        { expiresIn: '7d' }
+        { expiresIn: '7d' },
       );
 
       res.send({ token });
@@ -44,12 +44,12 @@ module.exports.createUser = (req, res, next) => {
           .then((hash) => User.create({
             name: req.body.name,
             email: req.body.email,
-            password: hash
+            password: hash,
           }))
           .then((newUser) => {
             res.status(201).send({
               name: newUser.name,
-              email: newUser.email
+              email: newUser.email,
             });
           })
           .catch((err) => {
@@ -74,20 +74,29 @@ module.exports.getCurrentUser = (req, res, next) => {
 
 module.exports.updateCurrentUser = (req, res, next) => {
   const newNameValue = req.body.name;
+  const newEmailValue = req.body.email;
 
-  User.findByIdAndUpdate(
-    { _id: req.user._id },
-    { name: newNameValue },
-    { new: true, runValidators: true }
-  )
+  User.findOne({ email: newEmailValue })
     .then((user) => {
-      res.status(200).send(user);
-    })
-    .catch((err) => {
-      if (err.name === 'ValidationError') {
-        throw new BadRequestError(VALIDATION_ERROR);
+      if (user) {
+        throw new ConflictError(NOT_UNIQUE_EMAIL_VALUE);
+      } else {
+        User.findByIdAndUpdate(
+          { _id: req.user._id },
+          { email: newEmailValue, name: newNameValue },
+          { new: true, runValidators: true },
+        )
+          .then((currentUser) => {
+            res.status(200).send(currentUser);
+          })
+          .catch((err) => {
+            if (err.name === 'ValidationError') {
+              throw new BadRequestError(VALIDATION_ERROR);
+            }
+            next(err);
+          })
+          .catch(next);
       }
-      next(err);
     })
     .catch(next);
 };

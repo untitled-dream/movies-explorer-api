@@ -4,20 +4,20 @@ const expressWinston = require('express-winston');
 const {
   LOGGER_FILENAME: {
     REQUEST,
-    ERROR
-  }
+    ERROR,
+  },
 } = require('../utils/constants');
 
 module.exports.requestLogger = expressWinston.logger({
   transports: [
-    new winston.transports.File({ filename: REQUEST })
+    new winston.transports.File({ filename: REQUEST }),
   ],
-  format: winston.format.json()
+  format: winston.format.json(),
 });
 
 module.exports.errorLogger = expressWinston.errorLogger({
   transports: [
-    new winston.transports.File({ filename: ERROR })
+    new winston.transports.File({ filename: ERROR }),
   ],
-  format: winston.format.json()
+  format: winston.format.json(),
 });

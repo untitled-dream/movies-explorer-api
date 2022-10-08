@@ -1,8 +1,7 @@
 const {
-  ALLOWED_CORS
+  ALLOWED_CORS,
 } = require('../utils/constants');
 
-// eslint-disable-next-line consistent-return
 module.exports = (req, res, next) => {
   const { origin } = req.headers;
   const { method } = req;
@@ -20,5 +19,5 @@ module.exports = (req, res, next) => {
     return res.status(200).end();
   }
 
-  next();
+  return next();
 };

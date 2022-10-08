@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs');
 
 const {
   USER_SCHEMA_MESSAGE,
-  AUTH_ERROR_WRONG_EMAIL_PASSWORD
+  AUTH_ERROR_WRONG_EMAIL_PASSWORD,
 } = require('../utils/constants');
 
 const userSchema = new mongoose.Schema({
@@ -20,8 +20,8 @@ const userSchema = new mongoose.Schema({
       validator(v) {
         return isEmail(v);
       },
-      message: (props) => `${props.value} ${USER_SCHEMA_MESSAGE.VALIDATE.EMAIL}`
-    }
+      message: (props) => `${props.value} ${USER_SCHEMA_MESSAGE.VALIDATE.EMAIL}`,
+    },
   },
   password: {
     type: String,
@@ -31,8 +31,8 @@ const userSchema = new mongoose.Schema({
       validator(v) {
         return isStrongPassword(v);
       },
-      message: () => USER_SCHEMA_MESSAGE.VALIDATE.PASSWORD
-    }
+      message: () => USER_SCHEMA_MESSAGE.VALIDATE.PASSWORD,
+    },
   },
   name: {
     type: String,
@@ -41,9 +41,9 @@ const userSchema = new mongoose.Schema({
       validator(v) {
         return isLength(v, { min: 2, max: 30 });
       },
-      message: (props) => `${props.value} ${USER_SCHEMA_MESSAGE.VALIDATE.NAME}`
-    }
-  }
+      message: (props) => `${props.value} ${USER_SCHEMA_MESSAGE.VALIDATE.NAME}`,
+    },
+  },
 });
 
 userSchema.statics.findUserByCredentials = function findUser(email, password) {

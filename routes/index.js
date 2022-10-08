@@ -4,18 +4,18 @@ const NotFoundError = require('../errors/notFoundError');
 
 const {
   ERROR_MESSAGE: {
-    NOT_FOUND
-  }
+    NOT_FOUND,
+  },
 } = require('../utils/constants');
 
 const {
   validateLogin,
-  validateSignup
+  validateSignup,
 } = require('../middlewares/validation');
 
 const {
   login,
-  createUser
+  createUser,
 } = require('../controllers/user');
 
 const auth = require('../middlewares/auth');
