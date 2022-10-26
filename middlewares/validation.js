@@ -40,8 +40,7 @@ module.exports.validateCreateMovie = celebrate({
     image: Joi.string().required().custom(URLValidator),
     trailerLink: Joi.string().required().custom(URLValidator),
     thumbnail: Joi.string().required().custom(URLValidator),
-    movieId: Joi.string().required().alphanum().length(24)
-      .hex(),
+    movieId: Joi.number().required(),
   }),
 });
 
