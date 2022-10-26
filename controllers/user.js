@@ -76,27 +76,19 @@ module.exports.updateCurrentUser = (req, res, next) => {
   const newNameValue = req.body.name;
   const newEmailValue = req.body.email;
 
-  User.findOne({ email: newEmailValue })
-    .then((user) => {
-      if (user) {
-        throw new ConflictError(NOT_UNIQUE_EMAIL_VALUE);
-      } else {
-        User.findByIdAndUpdate(
-          { _id: req.user._id },
-          { email: newEmailValue, name: newNameValue },
-          { new: true, runValidators: true },
-        )
-          .then((currentUser) => {
-            res.status(200).send(currentUser);
-          })
-          .catch((err) => {
-            if (err.name === 'ValidationError') {
-              throw new BadRequestError(VALIDATION_ERROR);
-            }
-            next(err);
-          })
-          .catch(next);
+  User.findByIdAndUpdate(
+    { _id: req.user._id },
+    { email: newEmailValue, name: newNameValue },
+    { new: true, runValidators: true },
+  )
+    .then((currentUser) => {
+      res.status(200).send(currentUser);
+    })
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        throw new BadRequestError(VALIDATION_ERROR);
       }
+      next(err);
     })
     .catch(next);
 };
