@@ -1,6 +1,7 @@
 const { celebrate, Joi, CelebrateError } = require('celebrate');
 
 const isURL = require('validator/lib/isURL');
+const isEmail = require('validator/lib/isEmail');
 
 const {
   ERROR_MESSAGE: {
@@ -24,7 +25,7 @@ module.exports.validateId = celebrate({
 module.exports.validateUpdateCurrentUser = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
-    email: Joi.string().required().email(),
+    email: Joi.string().required().custom(isEmail),
   }),
 });
 
@@ -53,14 +54,14 @@ module.exports.validateDeleteMovie = celebrate({
 
 module.exports.validateLogin = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().email(),
+    email: Joi.string().required().custom(isEmail),
     password: Joi.string().required().min(8).max(30),
   }),
 });
 
 module.exports.validateSignup = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().email(),
+    email: Joi.string().required().custom(isEmail),
     password: Joi.string().required(),
     name: Joi.string().required().min(2).max(30),
   }),
