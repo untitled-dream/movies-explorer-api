@@ -5,13 +5,20 @@ const isEmail = require('validator/lib/isEmail');
 
 const {
   ERROR_MESSAGE: {
-    BAD_LINK,
+    BAD_LINK, VALIDATION_ERROR,
   },
 } = require('../utils/constants');
 
 const URLValidator = (value) => {
   if (!isURL(value)) {
     throw new CelebrateError(`${BAD_LINK}`);
+  }
+  return value;
+};
+
+const emailValidator = (value) => {
+  if (!isEmail(value)) {
+    throw new CelebrateError(`${VALIDATION_ERROR}`);
   }
   return value;
 };
@@ -25,7 +32,7 @@ module.exports.validateId = celebrate({
 module.exports.validateUpdateCurrentUser = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
-    email: Joi.string().required().custom(isEmail),
+    email: Joi.string().required().custom(emailValidator),
   }),
 });
 
@@ -54,14 +61,14 @@ module.exports.validateDeleteMovie = celebrate({
 
 module.exports.validateLogin = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().custom(isEmail),
+    email: Joi.string().required().custom(emailValidator),
     password: Joi.string().required().min(8).max(30),
   }),
 });
 
 module.exports.validateSignup = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().custom(isEmail),
+    email: Joi.string().required().custom(emailValidator),
     password: Joi.string().required(),
     name: Joi.string().required().min(2).max(30),
   }),
